@@ -7,7 +7,7 @@ pluginManagement {
     }
 }
 
-rootProject.name = "purpur"
+rootProject.name = "firework"
 for (name in listOf("Purpur-API", "Purpur-Server")) {
     val projName = name.toLowerCase(Locale.ENGLISH)
     include(projName)
