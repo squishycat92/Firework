@@ -22,5 +22,5 @@ jobs:
       - name: Upload JAR
         uses: actions/upload-artifact@v3
         with:
-          name: server.jar
+          name: Firework Server JAR
           path: build/libs/firework-paperclip-*.jar
