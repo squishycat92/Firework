@@ -1,4 +1,4 @@
-name: Build Server JAR
+name: Build JAR
 on: [ push, pull_request ]
 
 jobs:
