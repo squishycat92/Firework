@@ -3,9 +3,11 @@ From: William Blake Galbreath <blake.galbreath@gmail.com>
 Date: Sat, 4 May 2019 01:02:11 -0500
 Subject: [PATCH] Rebrand
 
+Author:    Ted Hong <tedhong6@gmail.com>
+Date:      Tue May 31 11:27:01 2022 -0700
 
 diff --git a/build.gradle.kts b/build.gradle.kts
-index 9521971e9e597834e785b36d1657064dc1621b9b..655f4d84a9522b7af5f3fd234d8797758d0171b5 100644
+index 9521971e9e597834e785b36d1657064dc1621b9b..4c56481e2b22714c9caf749c38b082470469257b 100644
 --- a/build.gradle.kts
 +++ b/build.gradle.kts
 @@ -9,7 +9,7 @@ plugins {
@@ -31,7 +33,7 @@ index 9521971e9e597834e785b36d1657064dc1621b9b..655f4d84a9522b7af5f3fd234d879775
              "Main-Class" to "org.bukkit.craftbukkit.Main",
              "Implementation-Title" to "CraftBukkit",
 -            "Implementation-Version" to "git-Pufferfish-$implementationVersion", // Pufferfish
-+            "Implementation-Version" to "git-Purpur-$implementationVersion", // Pufferfish // Purpur
++            "Implementation-Version" to "git-Firework-$implementationVersion", // Pufferfish // Purpur // Firework
              "Implementation-Vendor" to date, // Paper
              "Specification-Title" to "Bukkit",
              "Specification-Version" to project.version,
@@ -45,7 +47,7 @@ index 9521971e9e597834e785b36d1657064dc1621b9b..655f4d84a9522b7af5f3fd234d879775
      standardInput = System.`in`
      workingDir = rootProject.layout.projectDirectory
 diff --git a/src/main/java/com/destroystokyo/paper/PaperVersionFetcher.java b/src/main/java/com/destroystokyo/paper/PaperVersionFetcher.java
-index bf42969859545a8a520923ef1836ffa4a5cc24a0..fba5dbdb7bcbb55400ef18342c9b54612972a718 100644
+index bf42969859545a8a520923ef1836ffa4a5cc24a0..388a3aecb02aebd8b2846bbf48f84cb32e8c1ea5 100644
 --- a/src/main/java/com/destroystokyo/paper/PaperVersionFetcher.java
 +++ b/src/main/java/com/destroystokyo/paper/PaperVersionFetcher.java
 @@ -19,8 +19,10 @@ import java.util.stream.StreamSupport;
@@ -54,10 +56,10 @@ index bf42969859545a8a520923ef1836ffa4a5cc24a0..fba5dbdb7bcbb55400ef18342c9b5461
      private static final java.util.regex.Pattern VER_PATTERN = java.util.regex.Pattern.compile("^([0-9\\.]*)\\-.*R"); // R is an anchor, will always give '-R' at end
 -    private static final String GITHUB_BRANCH_NAME = "master";
 -    private static final String DOWNLOAD_PAGE = "https://papermc.io/downloads";
-+    // Purpur start
-+    private static final String DOWNLOAD_PAGE = "https://purpurmc.org/downloads";
++    // Firework start
++    private static final String DOWNLOAD_PAGE = "https://github.com/squishycat92/Firework/releases";
 +    private static int distance = -2; public int distance() { return distance; }
-+    // Purpur end
++    // Firework end
      private static @Nullable String mcVer;
  
      @Override
@@ -67,8 +69,8 @@ index bf42969859545a8a520923ef1836ffa4a5cc24a0..fba5dbdb7bcbb55400ef18342c9b5461
      public Component getVersionMessage(@Nonnull String serverVersion) {
 -        String[] parts = serverVersion.substring("git-Paper-".length()).split("[-\\s]");
 -        final Component updateMessage = getUpdateStatusMessage("PaperMC/Paper", GITHUB_BRANCH_NAME, parts[0]);
-+        String[] parts = serverVersion.substring("git-Purpur-".length()).split("[-\\s]"); // Purpur
-+        final Component updateMessage = getUpdateStatusMessage("PurpurMC/Purpur", "ver/" + getMinecraftVersion(), parts[0]); // Purpur
++        String[] parts = serverVersion.substring("git-Firework-".length()).split("[-\\s]"); // Purpur // Firework
++        final Component updateMessage = getUpdateStatusMessage("squishycat92/Firework", getMinecraftVersion(), parts[0]); // Purpur // Firework
          final Component history = getHistory();
  
 -        return history != null ? TextComponent.ofChildren(updateMessage, Component.newline(), history) : updateMessage;
@@ -81,7 +83,7 @@ index bf42969859545a8a520923ef1836ffa4a5cc24a0..fba5dbdb7bcbb55400ef18342c9b5461
                  mcVer = result.substring(0, result.length() - 2); // strip 'R' anchor and trailing '-'
              } else {
 -                org.bukkit.Bukkit.getLogger().warning("Unable to match version to pattern! Report to PaperMC!");
-+                org.bukkit.Bukkit.getLogger().warning("Unable to match version to pattern! Report to Purpur!"); // Purpur
++                org.bukkit.Bukkit.getLogger().warning("Unable to match version to pattern! Report to Firework!"); // Purpur // Firework
                  org.bukkit.Bukkit.getLogger().warning("Pattern: " + VER_PATTERN.toString());
                  org.bukkit.Bukkit.getLogger().warning("Version: " + org.bukkit.Bukkit.getBukkitVersion());
              }
@@ -167,7 +169,7 @@ index 1a859fef0848cf23a672012e9764965ae1c07ec5..14ed740609b14242c2a8d377a78b2f71
          stringbuilder.append(CrashReport.getErrorComment());
          stringbuilder.append("\n\n");
 diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
-index 371b0f95b23d67c9913875a3dd7888e722551f18..a6f29c00d6716b501d0f52db8670d81e1304b7c0 100644
+index 371b0f95b23d67c9913875a3dd7888e722551f18..f932f834f14ae597f1643c032d6d6f1bc76b380b 100644
 --- a/src/main/java/net/minecraft/server/MinecraftServer.java
 +++ b/src/main/java/net/minecraft/server/MinecraftServer.java
 @@ -956,7 +956,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
@@ -175,7 +177,7 @@ index 371b0f95b23d67c9913875a3dd7888e722551f18..a6f29c00d6716b501d0f52db8670d81e
          org.spigotmc.WatchdogThread.doStop(); // Paper
          if (!isSameThread()) {
 -            MinecraftServer.LOGGER.info("Stopping main thread (Ignore any thread death message you see! - DO NOT REPORT THREAD DEATH TO PAPER)");
-+            MinecraftServer.LOGGER.info("Stopping main thread (Ignore any thread death message you see! - DO NOT REPORT THREAD DEATH TO PURPUR)"); // Purpur
++            MinecraftServer.LOGGER.info("Stopping main thread (Ignore any thread death message you see! - DO NOT REPORT THREAD DEATH TO FIREWORK!)"); // Purpur // Firework
              while (this.getRunningThread().isAlive()) {
                  this.getRunningThread().stop();
                  try {
@@ -184,7 +186,7 @@ index 371b0f95b23d67c9913875a3dd7888e722551f18..a6f29c00d6716b501d0f52db8670d81e
      @DontObfuscate
      public String getServerModName() {
 -        return "Pufferfish"; // Pufferfish - Pufferfish > // Paper - Paper > // Spigot - Spigot > // CraftBukkit - cb > vanilla!
-+        return "Purpur"; // Purpur - Purpur > // Pufferfish - Pufferfish > // Paper - Paper > // Spigot - Spigot > // CraftBukkit - cb > vanilla!
++        return "Firework"; // Firework - Firework > // Purpur - Purpur > // Pufferfish - Pufferfish > // Paper - Paper > // Spigot - Spigot > // CraftBukkit - cb > vanilla!
      }
  
      public SystemReport fillSystemReport(SystemReport details) {
@@ -221,7 +223,7 @@ index 303b70f0433ff49a3bee2a0d92c41f01aec38bee..5e9fc979daced5dad9977ab12ea019f4
  
      private static final int DEFAULT_SIZE_THRESHOLD = 1024 * 8;
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index f4a82b1f2dc26f938d3dcb23ec32f135a1bfd163..a2af4e9b32f9ebfb97255437a7028df8613d0d95 100644
+index f4a82b1f2dc26f938d3dcb23ec32f135a1bfd163..4b15df1f9f04b98dedf9d87b1aa56ffb5999bcc2 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 @@ -249,7 +249,7 @@ import javax.annotation.Nullable; // Paper
@@ -229,7 +231,7 @@ index f4a82b1f2dc26f938d3dcb23ec32f135a1bfd163..a2af4e9b32f9ebfb97255437a7028df8
  
  public final class CraftServer implements Server {
 -    private final String serverName = "Pufferfish"; // Paper // Pufferfish
-+    private final String serverName = "Purpur"; // Paper // Pufferfish // Purpur
++    private final String serverName = "Firework"; // Paper // Pufferfish // Purpur // Firework
      private final String serverVersion;
      private final String bukkitVersion = Versioning.getBukkitVersion();
      private final Logger logger = Logger.getLogger("Minecraft");
