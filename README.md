@@ -26,7 +26,7 @@ To generate your own JAR from Firework's source code, run these commands in the 
 ./gradlew build
 ./gradlew createReobfPaperclipJar
 ```
-The generated JAR file should be located in the `/build/libs` directory and named `firework-paperclip-*.jar`.
+The generated JAR file should be located in the `/build/libs` directory and named `firework-paperclip-*.jar`. You can either point your launch script to this new JAR or rename it to something else, such as `server.jar`.
 
 ## License
 This repository is licensed under the MIT license. All current patches are licensed under the MIT license, but upstream patches may be licensed differently. Please refer to the patch headers for patch-specific licenses.
