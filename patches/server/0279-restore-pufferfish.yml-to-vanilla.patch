@@ -1,0 +1,43 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Ted Hong <tedhong6@gmail.com>
+Date: Thu, 2 Jun 2022 10:29:46 -0700
+Subject: [PATCH] restore pufferfish.yml to vanilla
+
+
+diff --git a/src/main/java/gg/pufferfish/pufferfish/PufferfishConfig.java b/src/main/java/gg/pufferfish/pufferfish/PufferfishConfig.java
+index a820bfe38cb5765ee74c4fd7084d949477f83692..2706a74a6f2cf4138e26a3678abdde3091614a03 100644
+--- a/src/main/java/gg/pufferfish/pufferfish/PufferfishConfig.java
++++ b/src/main/java/gg/pufferfish/pufferfish/PufferfishConfig.java
+@@ -69,6 +69,10 @@ public class PufferfishConfig {
+ 		setComment("info",
+ 				"Pufferfish Configuration",
+ 				"Check out Pufferfish Host for maximum performance server hosting: https://pufferfish.host",
++				"",
++				"Firework restores configurations in this file to their corresponding values in the",
++				"vanilla game. If you find an incorrect configuration, please report it to GitHub Issues!",
++				"",
+ 				"Join our Discord for support: https://discord.gg/reZw4vQV9H",
+ 				"Download new builds at https://ci.pufferfish.host/job/Pufferfish");
+ 		
+@@ -185,7 +189,7 @@ public class PufferfishConfig {
+ 	}
+ 	
+ 	public static boolean enableSuffocationOptimization;
+-	private static void suffocationOptimization() {
++	private static void suffocationOptimization() { // Firework - This isn't vanilla, but most players don't notice this minor change. You can disable it if you experience issues.
+ 		enableSuffocationOptimization = getBoolean("enable-suffocation-optimization", true,
+ 				"Optimizes the suffocation check by selectively skipping",
+ 				"the check in a way that still appears vanilla. This should",
+diff --git a/src/main/java/gg/pufferfish/pufferfish/PufferfishLogger.java b/src/main/java/gg/pufferfish/pufferfish/PufferfishLogger.java
+index 53f2df00c6809618a9ee3d2ea72e85e8052fbcf1..aa4ccc66bdf14524a7eed0590bb587cb60305b28 100644
+--- a/src/main/java/gg/pufferfish/pufferfish/PufferfishLogger.java
++++ b/src/main/java/gg/pufferfish/pufferfish/PufferfishLogger.java
+@@ -8,7 +8,7 @@ public class PufferfishLogger extends Logger {
+     public static final PufferfishLogger LOGGER = new PufferfishLogger();
+ 
+     private PufferfishLogger() {
+-        super("Pufferfish", null);
++        super("Firework", null); // Firework
+ 
+         setParent(Bukkit.getLogger());
+         setLevel(Level.ALL);
