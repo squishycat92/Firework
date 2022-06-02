@@ -1,0 +1,38 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Ted Hong <tedhong6@gmail.com>
+Date: Thu, 2 Jun 2022 00:41:33 -0700
+Subject: [PATCH] restore purpur.yml to vanilla
+
+
+diff --git a/src/main/java/org/purpurmc/purpur/PurpurConfig.java b/src/main/java/org/purpurmc/purpur/PurpurConfig.java
+index c5b18b8d4ad74764fdeb5a1e21231e212e808b99..e933f75769c3d47f3ab43b43d30b842a08ba3726 100644
+--- a/src/main/java/org/purpurmc/purpur/PurpurConfig.java
++++ b/src/main/java/org/purpurmc/purpur/PurpurConfig.java
+@@ -45,6 +45,9 @@ public class PurpurConfig {
+             + "If you need help with the configuration or have any questions related to Purpur,\n"
+             + "join us in our Discord guild.\n"
+             + "\n"
++            + "Firework restores configurations in this file to their corresponding values in the\n"
++            + "vanilla game. If you find an incorrect configuration, please report it to GitHub Issues!\n"
++            + "\n"
+             + "Website: https://purpurmc.org \n"
+             + "Docs: https://purpurmc.org/docs \n";
+     private static File CONFIG_FILE;
+@@ -235,7 +238,7 @@ public class PurpurConfig {
+         if (!TimingsManager.hiddenConfigs.contains("settings.seed")) TimingsManager.hiddenConfigs.add("settings.seed");
+     }
+ 
+-    public static String serverModName = "Purpur";
++    public static String serverModName = "Firework";
+     private static void serverModName() {
+         serverModName = getString("settings.server-mod-name", serverModName);
+     }
+@@ -245,7 +248,7 @@ public class PurpurConfig {
+         laggingThreshold = getDouble("settings.lagging-threshold", laggingThreshold);
+     }
+ 
+-    public static boolean useAlternateKeepAlive = false;
++    public static boolean useAlternateKeepAlive = true; // Firework - Not vanilla, but this QoL feature prevents clients with weak internet from being kicked from the server.
+     private static void useAlternateKeepAlive() {
+         useAlternateKeepAlive = getBoolean("settings.use-alternate-keepalive", useAlternateKeepAlive);
+     }
