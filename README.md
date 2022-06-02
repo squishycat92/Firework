@@ -1,6 +1,6 @@
 # Firework
 
-<img src="https://static.wikia.nocookie.net/minecraft_gamepedia/images/f/fd/Firework_Rocket_JE2_BE2.png" alt="firework_rocket" width="16"/> Firework is Paper-based fork of Purpur that aims to add customized features to Minecraft. It primarily focuses on further improving server tick times and restoring some vanilla features, notably sand duping mechanics.
+<img src="https://static.wikia.nocookie.net/minecraft_gamepedia/images/f/fd/Firework_Rocket_JE2_BE2.png" alt="firework_rocket" width="16"/> Firework is a new Paper-based server software derived from Purpur. Firework un-patches many controversial changes introduced in upstream server softwares, such as duplication patches and changes to mob spawning behaviors. Firework aims to restore vanilla-like behavior while maintaining the excellent performance gains introduced by Spigot and Paper. It also preserves the extreme customizability introduced with Purpur. We sincerely hope you enjoy playing on Firework as much as we enjoy developing it!
 
 Firework is developed in collaboration with [nota-noob](https://github.com/nota-noob) for the Outcast SMP.
 
