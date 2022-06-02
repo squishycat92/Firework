@@ -1,0 +1,119 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Ted Hong <tedhong6@gmail.com>
+Date: Wed, 1 Jun 2022 19:07:03 -0700
+Subject: [PATCH] restore spigot.yml to vanilla
+
+
+diff --git a/src/main/java/org/spigotmc/SpigotConfig.java b/src/main/java/org/spigotmc/SpigotConfig.java
+index d509187ca63963fdd7f1a44d89d2aa1a1b1ce3bd..0fcd43c3f30d1b3042193259ab6361672953132a 100644
+--- a/src/main/java/org/spigotmc/SpigotConfig.java
++++ b/src/main/java/org/spigotmc/SpigotConfig.java
+@@ -41,6 +41,9 @@ public class SpigotConfig
+             + "If you need help with the configuration or have any questions related to Spigot,\n"
+             + "join us at the Discord or drop by our forums and leave a post.\n"
+             + "\n"
++            + "Firework restores configurations in this file to their corresponding values in the\n"
++            + "vanilla game. If you find an incorrect configuration, please report it to GitHub Issues!\n"
++            + "\n"
+             + "Discord: https://www.spigotmc.org/go/discord\n"
+             + "Forums: http://www.spigotmc.org/\n";
+     /*========================================================================*/
+@@ -197,8 +200,8 @@ public class SpigotConfig
+     public static String whitelistMessage;
+     public static String unknownCommandMessage;
+     public static String serverFullMessage;
+-    public static String outdatedClientMessage = "Outdated client! Please use {0}";
+-    public static String outdatedServerMessage = "Outdated server! I\'m still on {0}";
++    public static String outdatedClientMessage = "Your client is outdated! Please connect using Minecraft {0}.";
++    public static String outdatedServerMessage = "The server is outdated! Please connect using Minecraft {0}.";
+     private static String transform(String s)
+     {
+         return ChatColor.translateAlternateColorCodes( '&', s ).replaceAll( "\\\\n", "\n" );
+@@ -211,9 +214,9 @@ public class SpigotConfig
+             SpigotConfig.set( "messages.outdated-server", SpigotConfig.outdatedServerMessage );
+         }
+ 
+-        SpigotConfig.whitelistMessage = SpigotConfig.transform( SpigotConfig.getString( "messages.whitelist", "You are not whitelisted on this server!" ) );
+-        SpigotConfig.unknownCommandMessage = SpigotConfig.transform( SpigotConfig.getString( "messages.unknown-command", "Unknown command. Type \"/help\" for help." ) );
+-        SpigotConfig.serverFullMessage = SpigotConfig.transform( SpigotConfig.getString( "messages.server-full", "The server is full!" ) );
++        SpigotConfig.whitelistMessage = SpigotConfig.transform( SpigotConfig.getString( "messages.whitelist", "Sorry, but you aren't whitelisted on this server. Contact a server administrator to request a whitelist." ) );
++        SpigotConfig.unknownCommandMessage = SpigotConfig.transform( SpigotConfig.getString( "messages.unknown-command", "Unknown command. Try checking that you didn't mistype anything, or type \"/help\" for help." ) );
++        SpigotConfig.serverFullMessage = SpigotConfig.transform( SpigotConfig.getString( "messages.server-full", "The server is full! Wait for other players to disconnect." ) );
+         SpigotConfig.outdatedClientMessage = SpigotConfig.transform( SpigotConfig.getString( "messages.outdated-client", SpigotConfig.outdatedClientMessage ) );
+         SpigotConfig.outdatedServerMessage = SpigotConfig.transform( SpigotConfig.getString( "messages.outdated-server", SpigotConfig.outdatedServerMessage ) );
+     }
+@@ -227,7 +230,7 @@ public class SpigotConfig
+         SpigotConfig.timeoutTime = SpigotConfig.getInt( "settings.timeout-time", SpigotConfig.timeoutTime );
+         SpigotConfig.restartOnCrash = SpigotConfig.getBoolean( "settings.restart-on-crash", SpigotConfig.restartOnCrash );
+         SpigotConfig.restartScript = SpigotConfig.getString( "settings.restart-script", SpigotConfig.restartScript );
+-        SpigotConfig.restartMessage = SpigotConfig.transform( SpigotConfig.getString( "messages.restart", "Server is restarting" ) );
++        SpigotConfig.restartMessage = SpigotConfig.transform( SpigotConfig.getString( "messages.restart", "The server is restarting. Try joining in a few minutes." ) );
+         SpigotConfig.commands.put( "restart", new RestartCommand( "restart" ) );
+         //WatchdogThread.doStart( timeoutTime, restartOnCrash ); // Paper - moved to PaperConfig
+     }
+@@ -396,7 +399,7 @@ public class SpigotConfig
+     public static boolean logVillagerDeaths;
+     public static boolean logNamedDeaths;
+     private static void logDeaths() {
+-        SpigotConfig.logVillagerDeaths = SpigotConfig.getBoolean("settings.log-villager-deaths", true);
++        SpigotConfig.logVillagerDeaths = SpigotConfig.getBoolean("settings.log-villager-deaths", true); // This is really annoying, but it's default on vanilla. You can disable it on your specific server, it doesn't affect gameplay if you don't rely on this feature.
+         SpigotConfig.logNamedDeaths = SpigotConfig.getBoolean("settings.log-named-deaths", true);
+     }
+ 
+diff --git a/src/main/java/org/spigotmc/SpigotWorldConfig.java b/src/main/java/org/spigotmc/SpigotWorldConfig.java
+index 31a447e6e156b7b244b2ac69a9c03c09c7ed388c..8b0124921599e80a7aa29e5e3c24dc987ead457e 100644
+--- a/src/main/java/org/spigotmc/SpigotWorldConfig.java
++++ b/src/main/java/org/spigotmc/SpigotWorldConfig.java
+@@ -146,7 +146,8 @@ public class SpigotWorldConfig
+         this.glowBerryModifier = this.getAndValidateGrowth("GlowBerry");
+         // Paper end
+     }
+-
++    
++    // Firework - this is technically not vanilla, but it results in performance gains without really affecting the base game. Feel free to disable if you need to.
+     public double itemMerge;
+     private void itemMerge()
+     {
+@@ -196,7 +197,7 @@ public class SpigotWorldConfig
+     public byte mobSpawnRange;
+     private void mobSpawnRange()
+     {
+-        this.mobSpawnRange = (byte) getInt( "mob-spawn-range", 8 ); // Paper - Vanilla
++        this.mobSpawnRange = (byte) getInt( "mob-spawn-range", 8 ); // Firework - this is restored to vanilla!
+         this.log( "Mob Spawn Range: " + this.mobSpawnRange );
+     }
+ 
+@@ -206,11 +207,12 @@ public class SpigotWorldConfig
+         this.itemDespawnRate = this.getInt( "item-despawn-rate", 6000 );
+         this.log( "Item Despawn Rate: " + this.itemDespawnRate );
+     }
+-
+-    public int animalActivationRange = 32;
+-    public int monsterActivationRange = 32;
+-    public int raiderActivationRange = 48;
+-    public int miscActivationRange = 16;
++    // Firework start - this is restored to vanilla!
++    public int animalActivationRange = 64;
++    public int monsterActivationRange = 64;
++    public int raiderActivationRange = 64;
++    public int miscActivationRange = 32;
++    // Firework end
+     // Paper start
+     public int flyingMonsterActivationRange = 32;
+     public int waterActivationRange = 16;
+@@ -270,11 +272,13 @@ public class SpigotWorldConfig
+         this.log( "Entity Activation Range: An " + this.animalActivationRange + " / Mo " + this.monsterActivationRange + " / Ra " + this.raiderActivationRange + " / Mi " + this.miscActivationRange + " / Tiv " + this.tickInactiveVillagers + " / Isa " + this.ignoreSpectatorActivation );
+     }
+ 
+-    public int playerTrackingRange = 48;
++    // Firework start - this is restored to vanilla!
++    public int playerTrackingRange = 144;
+     public int animalTrackingRange = 48;
+-    public int monsterTrackingRange = 48;
++    public int monsterTrackingRange = 64;
+     public int miscTrackingRange = 32;
+     public int otherTrackingRange = 64;
++    // Firework end
+     private void trackingRange()
+     {
+         this.playerTrackingRange = this.getInt( "entity-tracking-range.players", this.playerTrackingRange );
