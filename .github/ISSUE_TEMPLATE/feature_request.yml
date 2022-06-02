@@ -1,0 +1,19 @@
+name: Feature Request
+description: Request a new feature or enhancement to be added.
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Before requesting for a new feature, check that you're running the latest version of Firework and that your feature request hasn't already been added or requested for.
+  - type: textarea
+    attributes:
+      label: Feature Request
+      description: What would you like to be added to Firework? Feel free to explain everything.
+      placeholder: Describe what you would like to be added here
+  - type: textarea
+    attributes:
+      label: Extra Information
+      description: Do you know how to implement this new feature? If so, let us know; it facilitates the implementation process and your feature request will have a greater chance of being added to Firework!
+      placeholder: Describe any extra information about your feature request
+    validations:
+      required: false
