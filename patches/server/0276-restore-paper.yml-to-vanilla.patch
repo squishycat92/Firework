@@ -157,7 +157,7 @@ index ce6fa0878ddd86d69e05ed64649e7105d25ce944..e7ec6a94e9e790fa39373b0ca92122ae
 +}
 \ No newline at end of file
 diff --git a/src/main/java/com/destroystokyo/paper/PaperWorldConfig.java b/src/main/java/com/destroystokyo/paper/PaperWorldConfig.java
-index fba36a0fd7036ba516e14c8d3521b470b0df17d1..e6fac8d00debc2d187d3daa3d4e9b07d432ca7e2 100644
+index fba36a0fd7036ba516e14c8d3521b470b0df17d1..584ef0f43e6ba3d087bfd2ef1ce1469d7dbb24fd 100644
 --- a/src/main/java/com/destroystokyo/paper/PaperWorldConfig.java
 +++ b/src/main/java/com/destroystokyo/paper/PaperWorldConfig.java
 @@ -85,11 +85,11 @@ public class PaperWorldConfig {
@@ -207,6 +207,15 @@ index fba36a0fd7036ba516e14c8d3521b470b0df17d1..e6fac8d00debc2d187d3daa3d4e9b07d
          log("Optimize explosions: " + optimizeExplosions);
      }
  
+@@ -591,7 +591,7 @@ public class PaperWorldConfig {
+         }
+     }
+ 
+-    public int maxCollisionsPerEntity = 8;
++    public int maxCollisionsPerEntity = 2; // Firework - This causes massive performance gains and shouldn't change farming mechanics. Disable if you are experiencing issues with cramming builds.
+     private void maxEntityCollision() {
+         maxCollisionsPerEntity = getInt( "max-entity-collisions", this.spigotConfig.getInt("max-entity-collisions", this.maxCollisionsPerEntity, false) );
+         log( "Max Entity Collisions: " + maxCollisionsPerEntity );
 @@ -611,10 +611,10 @@ public class PaperWorldConfig {
  
      public boolean disableSprintInterruptionOnAttack;
