@@ -1,0 +1,249 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Ted Hong <tedhong6@gmail.com>
+Date: Thu, 2 Jun 2022 00:17:12 -0700
+Subject: [PATCH] restore paper.yml to vanilla
+
+
+diff --git a/src/main/java/com/destroystokyo/paper/PaperConfig.java b/src/main/java/com/destroystokyo/paper/PaperConfig.java
+index ce6fa0878ddd86d69e05ed64649e7105d25ce944..e7ec6a94e9e790fa39373b0ca92122ae4e22aeb4 100644
+--- a/src/main/java/com/destroystokyo/paper/PaperConfig.java
++++ b/src/main/java/com/destroystokyo/paper/PaperConfig.java
+@@ -40,6 +40,9 @@ public class PaperConfig {
+             + "If you need help with the configuration or have any questions related to Paper,\n"
+             + "join us in our Discord or IRC channel.\n"
+             + "\n"
++            + "Firework restores configurations in this file to their corresponding values in the\n"
++            + "vanilla game. If you find an incorrect configuration, please report it to GitHub Issues!\n"
++            + "\n"
+             + "Discord: https://discord.gg/papermc\n"
+             + "IRC: #paper @ irc.esper.net ( https://webchat.esper.net/?channels=paper ) \n"
+             + "Website: https://papermc.io/ \n"
+@@ -241,15 +244,15 @@ public class PaperConfig {
+     public static String timingsServerName;
+     private static void timings() {
+         boolean timings = getBoolean("timings.enabled", true);
+-        // Pufferfish start
++        // Firework start
+         boolean reallyEnableTimings = getBoolean("timings.really-enabled", false);
+         if (timings && !reallyEnableTimings) {
+-            Bukkit.getLogger().log(Level.WARNING, "[Pufferfish] To improve performance, timings have been disabled by default");
+-            Bukkit.getLogger().log(Level.WARNING, "[Pufferfish] You can still use timings by using /timings on, but they will not start on server startup unless you set timings.really-enabled to true in paper.yml");
+-            Bukkit.getLogger().log(Level.WARNING, "[Pufferfish] If you would like to disable this message, either set timings.really-enabled to true or timings.enabled to false.");
++            Bukkit.getLogger().log(Level.WARNING, "[Firework] Pufferfish Timings have been disabled by default in order to improve performance.");
++            Bukkit.getLogger().log(Level.WARNING, "[Firework] Timings can be enabled by running /timings on, but they won't start on server startup unless you set timings.really-enabled to true in paper.yml.");
++            Bukkit.getLogger().log(Level.WARNING, "[Firework] You can disable this startup message by setting timings.really-enabled to true or timings.enabled to false.");
+         }
+         timings = reallyEnableTimings;
+-        // Pufferfish end
++        // Firework end
+         boolean verboseTimings = getBoolean("timings.verbose", true);
+         TimingsManager.url = getString("timings.url", "https://timings.aikar.co/");
+         // Purpur start
+@@ -322,8 +325,8 @@ public class PaperConfig {
+         packetInSpamThreshold = getInt("settings.incoming-packet-spam-threshold", 300);
+     }
+ 
+-    public static String flyingKickPlayerMessage = "Flying is not enabled on this server";
+-    public static String flyingKickVehicleMessage = "Flying is not enabled on this server";
++    public static String flyingKickPlayerMessage = "Flying isn't enabled on this server!";
++    public static String flyingKickVehicleMessage = "Flying isn't enabled on this server!";
+     private static void flyingKickMessages() {
+         flyingKickPlayerMessage = getString("messages.kick.flying-player", flyingKickPlayerMessage);
+         flyingKickVehicleMessage = getString("messages.kick.flying-vehicle", flyingKickVehicleMessage);
+@@ -339,12 +342,12 @@ public class PaperConfig {
+         authenticationServersDownKickMessage = Strings.emptyToNull(getString("messages.kick.authentication-servers-down", authenticationServersDownKickMessage));
+     }
+ 
+-    public static String connectionThrottleKickMessage = "Connection throttled! Please wait before reconnecting.";
++    public static String connectionThrottleKickMessage = "Connection throttled! Please wait a few seconds before reconnecting.";
+     private static void connectionThrottleKickMessage() {
+         connectionThrottleKickMessage = getString("messages.kick.connection-throttle", connectionThrottleKickMessage);
+     }
+ 
+-    public static String noPermissionMessage = "&cI'm sorry, but you do not have permission to perform this command. Please contact the server administrators if you believe that this is in error.";
++    public static String noPermissionMessage = "&cYou don't have permission to perform this command. Please contact the server administrators if you believe that this is in error.";
+     private static void noPermissionMessage() {
+         noPermissionMessage = ChatColor.translateAlternateColorCodes('&', getString("messages.no-permission", noPermissionMessage));
+     }
+@@ -487,26 +490,26 @@ public class PaperConfig {
+         useRgbForNamedTextColors = getBoolean("settings.loggers.use-rgb-for-named-text-colors", useRgbForNamedTextColors);
+     }
+ 
+-    public static boolean allowBlockPermanentBreakingExploits = false;
++    public static boolean allowBlockPermanentBreakingExploits = true;
+     private static void allowBlockPermanentBreakingExploits() {
+         if (config.contains("allow-perm-block-break-exploits")) {
+-            allowBlockPermanentBreakingExploits = config.getBoolean("allow-perm-block-break-exploits", false);
++            allowBlockPermanentBreakingExploits = config.getBoolean("allow-perm-block-break-exploits", true); // Firework
+             config.set("allow-perm-block-break-exploits", null);
+         }
+ 
+-        config.set("settings.unsupported-settings.allow-permanent-block-break-exploits-readme", "This setting controls if players should be able to break bedrock, end portals and other intended to be permanent blocks.");
++        config.set("settings.unsupported-settings.allow-permanent-block-break-exploits-readme", "This setting controls if players should be able to break bedrock, end portals and other intended to be permanent blocks. Firework resets this to its vanilla value by default.");
+         allowBlockPermanentBreakingExploits = getBoolean("settings.unsupported-settings.allow-permanent-block-break-exploits", allowBlockPermanentBreakingExploits);
+     }
+ 
+-    public static boolean consoleHasAllPermissions = false;
++    public static boolean consoleHasAllPermissions = true; // Firework
+     private static void consoleHasAllPermissions() {
+-        consoleHasAllPermissions = getBoolean("settings.console-has-all-permissions", consoleHasAllPermissions);
++        consoleHasAllPermissions = getBoolean("settings.console-has-all-permissions", consoleHasAllPermissions); // Firework
+     }
+ 
+     public static boolean allowPistonDuplication;
+     private static void allowPistonDuplication() {
+-        config.set("settings.unsupported-settings.allow-piston-duplication-readme", "This setting controls if player should be able to use TNT duplication, but this also allows duplicating carpet, rails and potentially other items");
+-        allowPistonDuplication = getBoolean("settings.unsupported-settings.allow-piston-duplication", config.getBoolean("settings.unsupported-settings.allow-tnt-duplication", false));
++        config.set("settings.unsupported-settings.allow-piston-duplication-readme", "This setting controls if player should be able to use TNT duplication, but this also allows duplicating carpet, rails and potentially other items. Firework resets this to its vanilla value by default."); // Firework
++        allowPistonDuplication = getBoolean("settings.unsupported-settings.allow-piston-duplication", config.getBoolean("settings.unsupported-settings.allow-tnt-duplication", true)); // Firework
+         set("settings.unsupported-settings.allow-tnt-duplication", null);
+     }
+ 
+@@ -529,8 +532,8 @@ public class PaperConfig {
+ 
+     public static boolean allowHeadlessPistons;
+     private static void allowHeadlessPistons() {
+-        config.set("settings.unsupported-settings.allow-headless-pistons-readme", "This setting controls if players should be able to create headless pistons.");
+-        allowHeadlessPistons = getBoolean("settings.unsupported-settings.allow-headless-pistons", false);
++        config.set("settings.unsupported-settings.allow-headless-pistons-readme", "This setting controls if players should be able to create headless pistons. Firework resets this to its vanilla value by default."); // Firework
++        allowHeadlessPistons = getBoolean("settings.unsupported-settings.allow-headless-pistons", true); // Firework
+     }
+ 
+     public static int itemValidationDisplayNameLength = 8192;
+@@ -663,8 +666,8 @@ public class PaperConfig {
+         sendFullPosForHardCollidingEntities = getBoolean("settings.send-full-pos-for-hard-colliding-entities", true);
+     }
+ 
+-    public static boolean timeCommandAffectsAllWorlds = false; // See https://hub.spigotmc.org/stash/projects/SPIGOT/repos/craftbukkit/commits/aeaeb359317e6ba25b7c45cf6d70ff945a3777cf
+-    private static void timeCommandAffectsAllWorlds() {
++    public static boolean timeCommandAffectsAllWorlds = true; // INVALID - SEE BELOW // See https://hub.spigotmc.org/stash/projects/SPIGOT/repos/craftbukkit/commits/aeaeb359317e6ba25b7c45cf6d70ff945a3777cf // Firework
++    private static void timeCommandAffectsAllWorlds() { // As of Minecraft 1.18.2, /time affects the time in all dimensions // Firework
+         timeCommandAffectsAllWorlds = getBoolean("settings.time-command-affects-all-worlds", timeCommandAffectsAllWorlds);
+     }
+ 
+@@ -680,13 +683,15 @@ public class PaperConfig {
+     public static double globalMaxConcurrentChunkLoads;
+     public static double playerMaxChunkLoadRate;
+ 
++
++    // Firework start - this optimizes Elytra visibility while flying, but may lead to increased resource usage! Revert these settings if you experience issues!
+     private static void newPlayerChunkManagement() {
+-        playerMinChunkLoadRadius = getInt("settings.chunk-loading.min-load-radius", 2);
+-        playerMaxConcurrentChunkSends = getInt("settings.chunk-loading.max-concurrent-sends", 2);
++        playerMinChunkLoadRadius = getInt("settings.chunk-loading.min-load-radius", 4); // 5 total client-side; this makes the server appear less laggy
++        playerMaxConcurrentChunkSends = getInt("settings.chunk-loading.max-concurrent-sends", 10000); // Make sure you don't have compression on your server
+         playerAutoConfigureSendViewDistance = getBoolean("settings.chunk-loading.autoconfig-send-distance", true);
+-        playerTargetChunkSendRate = getDouble("settings.chunk-loading.target-player-chunk-send-rate", 100.0);
++        playerTargetChunkSendRate = getDouble("settings.chunk-loading.target-player-chunk-send-rate", -1.0); // Send as much chunks as the network can handle
+         globalMaxChunkSendRate = getDouble("settings.chunk-loading.global-max-chunk-send-rate", -1.0);
+-        playerFrustumPrioritisation = getBoolean("settings.chunk-loading.enable-frustum-priority", false);
++        playerFrustumPrioritisation = getBoolean("settings.chunk-loading.enable-frustum-priority", false); // This seems like a good feature, but can cause issues with clients. Enable it if you want to try it out.
+         globalMaxChunkLoadRate = getDouble("settings.chunk-loading.global-max-chunk-load-rate", -1.0);
+         if (version < 23 && globalMaxChunkLoadRate == 300.0) {
+             set("settings.chunk-loading.global-max-chunk-load-rate", globalMaxChunkLoadRate = -1.0);
+@@ -698,6 +703,7 @@ public class PaperConfig {
+         globalMaxConcurrentChunkLoads = getDouble("settings.chunk-loading.global-max-concurrent-loads", 500.0);
+         playerMaxChunkLoadRate = getDouble("settings.chunk-loading.player-max-chunk-load-rate", -1.0);
+     }
++    // Firework end
+ 
+     public static boolean useDimensionTypeForCustomSpawners;
+     private static void useDimensionTypeForCustomSpawners() {
+@@ -708,4 +714,4 @@ public class PaperConfig {
+     private static void useProxyProtocol() {
+         useProxyProtocol = getBoolean("settings.proxy-protocol", false);
+     }
+-}
++}
+\ No newline at end of file
+diff --git a/src/main/java/com/destroystokyo/paper/PaperWorldConfig.java b/src/main/java/com/destroystokyo/paper/PaperWorldConfig.java
+index fba36a0fd7036ba516e14c8d3521b470b0df17d1..e6fac8d00debc2d187d3daa3d4e9b07d432ca7e2 100644
+--- a/src/main/java/com/destroystokyo/paper/PaperWorldConfig.java
++++ b/src/main/java/com/destroystokyo/paper/PaperWorldConfig.java
+@@ -85,11 +85,11 @@ public class PaperWorldConfig {
+     public enum RedstoneImplementation {
+         VANILLA, EIGENCRAFT, ALTERNATE_CURRENT
+     }
+-    public RedstoneImplementation redstoneImplementation = RedstoneImplementation.VANILLA;
++    public RedstoneImplementation redstoneImplementation = RedstoneImplementation.EIGENCRAFT; // Firework - This is technically NON-VANILLA, but it's implemented in Carpet, so it should be safe to implement here. Revert this if you run into issues!
+     private void redstoneImplementation() {
+         String implementation;
+         if (PaperConfig.version < 27) {
+-            implementation = "vanilla";
++            implementation = "eigencraft";
+             if (config.contains("world-settings.default.use-faster-eigencraft-redstone")) {
+                 implementation = config.getBoolean("world-settings.default.use-faster-eigencraft-redstone") ? "eigencraft" : "vanilla";
+                 config.set("world-settings.default.redstone-implementation", implementation);
+@@ -111,7 +111,7 @@ public class PaperWorldConfig {
+                 break;
+             case "eigencraft":
+                 redstoneImplementation = RedstoneImplementation.EIGENCRAFT;
+-                log("Using Eigencraft's redstone implementation by theosib.");
++                log("Using Eigencraft's redstone implementation by theosib. Firework sets this as default because it's default in Carpet.");
+                 break;
+             case "alternate-current":
+                 redstoneImplementation = RedstoneImplementation.ALTERNATE_CURRENT;
+@@ -153,12 +153,12 @@ public class PaperWorldConfig {
+         wanderingTraderSpawnChanceMax = getInt("wandering-trader.spawn-chance-max", wanderingTraderSpawnChanceMax);
+     }
+ 
+-    public boolean fixClimbingBypassingCrammingRule = false;
++    public boolean fixClimbingBypassingCrammingRule = true; // Firework
+     private void fixClimbingBypassingCrammingRule() {
+         fixClimbingBypassingCrammingRule = getBoolean("fix-climbing-bypassing-cramming-rule", fixClimbingBypassingCrammingRule);
+     }
+ 
+-    public boolean fixCuringZombieVillagerDiscountExploit = true;
++    public boolean fixCuringZombieVillagerDiscountExploit = false; // Firework 
+     private void fixCuringExploit() {
+         fixCuringZombieVillagerDiscountExploit = getBoolean("game-mechanics.fix-curing-zombie-villager-discount-exploit", fixCuringZombieVillagerDiscountExploit);
+     }
+@@ -396,7 +396,7 @@ public class PaperWorldConfig {
+ 
+     public boolean optimizeExplosions;
+     private void optimizeExplosions() {
+-        optimizeExplosions = getBoolean("optimize-explosions", false);
++        optimizeExplosions = getBoolean("optimize-explosions", true); // Firework - Causes extremely minimal changes to gameplay, while drastically reducing server load.
+         log("Optimize explosions: " + optimizeExplosions);
+     }
+ 
+@@ -611,10 +611,10 @@ public class PaperWorldConfig {
+ 
+     public boolean disableSprintInterruptionOnAttack;
+     private void disableSprintInterruptionOnAttack() {
+-        disableSprintInterruptionOnAttack = getBoolean("game-mechanics.disable-sprint-interruption-on-attack", false);
++        disableSprintInterruptionOnAttack = getBoolean("game-mechanics.disable-sprint-interruption-on-attack", true); // Firework - In vanilla Minecraft, the player isn't interrupted upon taking damage.
+     }
+ 
+-    public boolean disableEnderpearlExploit = true;
++    public boolean disableEnderpearlExploit = false; // Firework
+     private void disableEnderpearlExploit() {
+         disableEnderpearlExploit = getBoolean("game-mechanics.disable-unloaded-chunk-enderpearl-exploit", disableEnderpearlExploit);
+         log("Disable Unloaded Chunk Enderpearl Exploit: " + (disableEnderpearlExploit ? "enabled" : "disabled"));
+@@ -898,7 +898,7 @@ public class PaperWorldConfig {
+         }
+     }
+ 
+-    public boolean perPlayerMobSpawns = false;
++    public boolean perPlayerMobSpawns = true; // Firework - This isn't vanilla either, but it replicates the experience in singleplayer. Improves the experience in multiplayer, especially when farming mobs with high player counts.
+     private void perPlayerMobSpawns() {
+         if (PaperConfig.version < 22) {
+             set("per-player-mob-spawns", Boolean.TRUE);
+@@ -966,7 +966,7 @@ public class PaperWorldConfig {
+         fixItemsMergingThroughWalls = getBoolean("fix-items-merging-through-walls", fixItemsMergingThroughWalls);
+     }
+ 
+-    public boolean fixInvulnerableEndCrystalExploit = true;
++    public boolean fixInvulnerableEndCrystalExploit = false; // Firework
+     private void fixInvulnerableEndCrystalExploit() {
+         fixInvulnerableEndCrystalExploit = getBoolean("unsupported-settings.fix-invulnerable-end-crystal-exploit", fixInvulnerableEndCrystalExploit);
+     }
+@@ -976,7 +976,7 @@ public class PaperWorldConfig {
+         showSignClickCommandFailureMessagesToPlayer = getBoolean("show-sign-click-command-failure-msgs-to-player", showSignClickCommandFailureMessagesToPlayer);
+     }
+ 
+-    public boolean allowPlayerCrammingDamage = false;
++    public boolean allowPlayerCrammingDamage = true; // Firework
+     private void playerCrammingDamage() {
+         allowPlayerCrammingDamage = getBoolean("allow-player-cramming-damage", allowPlayerCrammingDamage);
+     }
