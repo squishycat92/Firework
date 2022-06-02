@@ -26,17 +26,6 @@ body:
       description: |
         Run `/version` on your server and paste the full, unmodified output here. **We don't accept screenshots!**
         "latest" is NOT a version; we require the actual output of `/version` so that we can isolate and track down the problem.
-        <details>
-        <summary>Example Output</summary>
-
-        ```
-        > version
-        [20:47:53 INFO]: Checking version, please wait...
-        [20:47:54 INFO]: Current: git-Firework-"abc123f" (MC: 1.18.2)*
-        * You are running the latest version
-        ```
-
-        </details>
     validations:
       required: true
   - type: textarea
