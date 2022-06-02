@@ -1,0 +1,19 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Ted Hong <tedhong6@gmail.com>
+Date: Wed, 1 Jun 2022 17:54:14 -0700
+Subject: [PATCH] restore bukkit.yml to vanilla
+
+
+diff --git a/src/main/resources/configurations/bukkit.yml b/src/main/resources/configurations/bukkit.yml
+index 97239f7aadd761f6f709a6d6c913e577651a87df..98745cc0b957f6868e4357c583a3ace1cb2cde20 100644
+--- a/src/main/resources/configurations/bukkit.yml
++++ b/src/main/resources/configurations/bukkit.yml
+@@ -20,7 +20,7 @@ settings:
+     connection-throttle: 4000
+     query-plugins: true
+     deprecated-verbose: default
+-    shutdown-message: Server closed
++    shutdown-message: Server closed. If this was not intentional, contact an administrator.
+     minimum-api: none
+ spawn-limits:
+     monsters: 70
